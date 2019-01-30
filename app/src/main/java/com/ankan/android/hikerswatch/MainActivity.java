@@ -1,6 +1,7 @@
 package com.ankan.android.hikerswatch;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -8,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 Location lastKnownLocation = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
                 if(lastKnownLocation != null) {
                     updateLocationInfo(lastKnownLocation);
+                } else {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
                 }
 
         }
